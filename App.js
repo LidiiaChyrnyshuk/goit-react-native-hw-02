@@ -20,12 +20,13 @@ export default function App() {
 		return null;
 	} else {
 		return (
-			<RegistrationScreen />
+			// <RegistrationScreen />
+			<LoginScreen />
 			// <NavigationContainer>
 			// 	<Stack.Navigator>
 			// 		<Stack.Screen name="Registration" component={RegistrationScreen} />
 			// 		<Stack.Screen name="Login" component={LoginScreen} />
-			// 		<Stack.Screen name="Posts" component={PostsScreen} />
+			// 		<Stack.Screen name="Posts" component={PostsScreen} options={title: 'Публікації'}/>
 			// 	</Stack.Navigator>
 			// </NavigationContainer>
 		);

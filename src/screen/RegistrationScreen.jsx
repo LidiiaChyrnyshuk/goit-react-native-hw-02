@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	Button,
 	Image,
@@ -7,15 +7,17 @@ import {
 	StyleSheet,
 	Text,
 	TextInput,
+	TouchableOpacity,
 	View,
 } from "react-native";
 
 import BgImage from "../image/photo-bg.jpg";
 import { Ionicons } from "@expo/vector-icons";
 
-export const RegistrationScreen = (props) => {
+export const RegistrationScreen = () => {
+	const [focusedInput, setFocusedInput] = useState(null);
 	return (
-		<ImageBackground source={BgImage}>
+		<ImageBackground source={BgImage} resizeMode="cover" style={styles.image}>
 			<View style={styles.container}>
 				<KeyboardAvoidingView
 					behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -32,22 +34,20 @@ export const RegistrationScreen = (props) => {
 						</View>
 						<Text style={styles.screenTitle}>Реєстрація</Text>
 						<TextInput
-							value="login"
 							placeholder="Логін"
 							placeholderTextColor="#BDBDBD"
 							style={styles.input}
 							required
 						/>
 						<TextInput
-							value="email"
 							placeholder="Адреса електронної пошти"
 							placeholderTextColor="#BDBDBD"
 							style={styles.input}
+							keyboardType="email-address"
 							required
 						/>
 						<View>
 							<TextInput
-								value="password"
 								placeholder="Пароль"
 								placeholderTextColor="#BDBDBD"
 								style={styles.passwordInput}
@@ -55,8 +55,10 @@ export const RegistrationScreen = (props) => {
 							/>
 							<Text style={styles.showPasswordButtonText}>Показати</Text>
 						</View>
+						<TouchableOpacity style={styles.primaryBtn}>
+							<Text style={styles.textBtn}>Зареєстуватися</Text>
+						</TouchableOpacity>
 
-						<Button title="Зареєстуватися" style={styles.primaryBtn} />
 						<Text style={styles.registerLink}>Вже є акаунт? Увійти</Text>
 					</View>
 				</KeyboardAvoidingView>
@@ -66,10 +68,12 @@ export const RegistrationScreen = (props) => {
 };
 const styles = StyleSheet.create({
 	container: {
-		display: "flex",
-		flexDirection: "colum",
-		width: "100%",
+		flex: 1,
 		justifyContent: "flex-end",
+	},
+	image: {
+		flex: 1,
+		justifyContent: "center",
 	},
 	form: {
 		position: "relative",
@@ -148,14 +152,19 @@ const styles = StyleSheet.create({
 	},
 	primaryBtn: {
 		width: 343,
-		height: 51,
-		textAlign: "center",
+
+		paddingTop: 16,
+		paddingBottom: 16,
 		borderRadius: 100,
 		backgroundColor: "#FF6C00",
+		textAlign: "center",
+		marginBottom: 16,
+	},
+	textBtn: {
 		color: "#fff",
 		fontSize: 16,
 		fontFamily: "roboto-400",
-		marginBottom: 16,
+		textAlign: "center",
 	},
 	registerLink: {
 		fontSize: 16,
