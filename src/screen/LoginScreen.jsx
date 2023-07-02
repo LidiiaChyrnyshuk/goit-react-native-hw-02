@@ -1,64 +1,72 @@
 import React, { useState } from "react";
 import {
-	Button,
 	Image,
 	ImageBackground,
+	Keyboard,
 	KeyboardAvoidingView,
+	Platform,
 	StyleSheet,
 	Text,
 	TextInput,
 	TouchableOpacity,
+	TouchableWithoutFeedback,
 	View,
 } from "react-native";
 
 import BgImage from "../image/photo-bg.jpg";
-import { Ionicons } from "@expo/vector-icons";
 
 export const LoginScreen = () => {
+	const [focusedInput, setFocusedInput] = useState(null);
 	return (
 		<ImageBackground source={BgImage} resizeMode="cover" style={styles.image}>
-			<View style={styles.container}>
-				<KeyboardAvoidingView
-					behavior={Platform.OS == "ios" ? "padding" : "height"}
-				>
-					<View style={styles.form}>
-						<View style={styles.imageWrapper}>
-							<Image style={styles.avatarImage} />
-							<Ionicons
-								name="add-circle-outline"
-								size={25}
-								color="#FF6C00"
-								style={styles.addButton}
-							/>
-						</View>
-						<Text style={styles.screenTitle}>Увійти</Text>
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+				<View style={styles.container}>
+					<KeyboardAvoidingView
+						behavior={Platform.OS == "ios" ? "padding" : "height"}
+					>
+						<View style={styles.form}>
+							<Text style={styles.screenTitle}>Увійти</Text>
 
-						<TextInput
-							placeholder="Адреса електронної пошти"
-							placeholderTextColor="#BDBDBD"
-							style={styles.input}
-							keyboardType="email-address"
-							required
-						/>
-						<View>
 							<TextInput
-								placeholder="Пароль"
+								placeholder="Адреса електронної пошти"
 								placeholderTextColor="#BDBDBD"
-								style={styles.passwordInput}
+								style={[
+									styles.input,
+									focusedInput === "Email" && styles.inputActive,
+								]}
+								onFocus={() => {
+									setFocusedInput("Email");
+								}}
+								keyboardType="email-address"
 								required
 							/>
-							<Text style={styles.showPasswordButtonText}>Показати</Text>
-						</View>
-						<TouchableOpacity style={styles.primaryBtn}>
-							<Text style={styles.textBtn}>Увійти</Text>
-						</TouchableOpacity>
+							<View style={styles.passwordInputWrapper}>
+								<TextInput
+									secureTextEntry={true}
+									placeholder="Пароль"
+									placeholderTextColor="#BDBDBD"
+									style={[
+										styles.input,
+										focusedInput === "Password" && styles.inputActive,
+									]}
+									onFocus={() => {
+										setFocusedInput("Password");
+									}}
+									required
+								/>
+								<Text style={styles.showPasswordButtonText}>Показати</Text>
+							</View>
+							<TouchableOpacity style={styles.primaryBtn}>
+								<Text style={styles.textBtn}>Увійти</Text>
+							</TouchableOpacity>
 
-						<Text style={styles.registerLink}>
-							Немає акаунту? Зареєструватися
-						</Text>
-					</View>
-				</KeyboardAvoidingView>
-			</View>
+							<Text style={styles.registerLink}>
+								Немає акаунту? Зареєструватися
+							</Text>
+						</View>
+					</KeyboardAvoidingView>
+				</View>
+			</TouchableWithoutFeedback>
 		</ImageBackground>
 	);
 };
@@ -73,11 +81,12 @@ const styles = StyleSheet.create({
 	},
 	form: {
 		position: "relative",
+		width: "100%",
 		backgroundColor: "#fff",
 		alignItems: "center",
 		borderTopLeftRadius: 25,
 		borderTopRightRadius: 25,
-		paddingTop: 92,
+		paddingTop: 32,
 		paddingBottom: 78,
 		paddingLeft: 16,
 		paddingRight: 16,
@@ -108,7 +117,7 @@ const styles = StyleSheet.create({
 		color: "#212121",
 	},
 	input: {
-		width: 343,
+		width: "100%",
 		height: 50,
 		borderWidth: 1,
 		borderColor: "#E8E8E8",
@@ -123,20 +132,12 @@ const styles = StyleSheet.create({
 		borderColor: "#FF6C00",
 		color: "#212121",
 	},
-	passwordInput: {
+	passwordInputWrapper: {
+		width: "100%",
 		position: "relative",
 		marginBottom: 43,
-
-		width: 343,
-		height: 50,
-		borderWidth: 1,
-		borderColor: "#E8E8E8",
-		borderRadius: 8,
-		backgroundColor: "#f6f6f6",
-		marginBottom: 16,
-		padding: 16,
-		fontFamily: "roboto-400",
 	},
+
 	showPasswordButtonText: {
 		position: "absolute",
 		top: 16,
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
 		fontFamily: "roboto-400",
 	},
 	primaryBtn: {
-		width: 343,
+		width: "100%",
 
 		paddingTop: 16,
 		paddingBottom: 16,
