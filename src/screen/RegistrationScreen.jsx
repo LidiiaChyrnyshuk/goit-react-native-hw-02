@@ -18,6 +18,22 @@ import { Ionicons } from "@expo/vector-icons";
 
 export const RegistrationScreen = () => {
 	const [focusedInput, setFocusedInput] = useState(null);
+	const [hidePassword, setHidePassword] = useState(true);
+	const [login, setLogin] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const submitData = {
+		login,
+		email,
+		password,
+	};
+	const onSubmit = () => {
+		console.log(submitData);
+
+		setLogin("");
+		setEmail("");
+		setPassword("");
+	};
 	return (
 		<ImageBackground source={BgImage} resizeMode="cover" style={styles.image}>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -37,6 +53,8 @@ export const RegistrationScreen = () => {
 							</View>
 							<Text style={styles.screenTitle}>Реєстрація</Text>
 							<TextInput
+								value={login}
+								onChangeText={setLogin}
 								placeholder="Логін"
 								placeholderTextColor="#BDBDBD"
 								style={[
@@ -49,6 +67,8 @@ export const RegistrationScreen = () => {
 								required
 							/>
 							<TextInput
+								value={email}
+								onChangeText={setEmail}
 								placeholder="Адреса електронної пошти"
 								placeholderTextColor="#BDBDBD"
 								style={[
@@ -63,7 +83,9 @@ export const RegistrationScreen = () => {
 							/>
 							<View style={styles.passwordInputWrapper}>
 								<TextInput
-									secureTextEntry={true}
+									value={password}
+									onChangeText={setPassword}
+									secureTextEntry={hidePassword ? true : false}
 									placeholder="Пароль"
 									placeholderTextColor="#BDBDBD"
 									style={[
@@ -75,10 +97,17 @@ export const RegistrationScreen = () => {
 									}}
 									required
 								/>
-								<Text style={styles.showPasswordButtonText}>Показати</Text>
+								<Text
+									style={styles.showPasswordButtonText}
+									onPress={() => setHidePassword(!hidePassword)}
+								>
+									{hidePassword ? "Показати" : "Приховати"}
+								</Text>
 							</View>
 							<TouchableOpacity style={styles.primaryBtn}>
-								<Text style={styles.textBtn}>Зареєстуватися</Text>
+								<Text style={styles.textBtn} onPress={onSubmit}>
+									Зареєстуватися
+								</Text>
 							</TouchableOpacity>
 
 							<Text style={styles.registerLink}>Вже є акаунт? Увійти</Text>

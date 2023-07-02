@@ -17,6 +17,19 @@ import BgImage from "../image/photo-bg.jpg";
 
 export const LoginScreen = () => {
 	const [focusedInput, setFocusedInput] = useState(null);
+	const [hidePassword, setHidePassword] = useState(true);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const submitData = {
+		email,
+		password,
+	};
+	const onLogin = () => {
+		console.log(submitData);
+
+		setEmail("");
+		setPassword("");
+	};
 	return (
 		<ImageBackground source={BgImage} resizeMode="cover" style={styles.image}>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -28,6 +41,8 @@ export const LoginScreen = () => {
 							<Text style={styles.screenTitle}>Увійти</Text>
 
 							<TextInput
+								value={email}
+								onChangeText={setEmail}
 								placeholder="Адреса електронної пошти"
 								placeholderTextColor="#BDBDBD"
 								style={[
@@ -42,7 +57,9 @@ export const LoginScreen = () => {
 							/>
 							<View style={styles.passwordInputWrapper}>
 								<TextInput
-									secureTextEntry={true}
+									value={password}
+									onChangeText={setPassword}
+									secureTextEntry={hidePassword ? true : false}
 									placeholder="Пароль"
 									placeholderTextColor="#BDBDBD"
 									style={[
@@ -54,10 +71,17 @@ export const LoginScreen = () => {
 									}}
 									required
 								/>
-								<Text style={styles.showPasswordButtonText}>Показати</Text>
+								<Text
+									style={styles.showPasswordButtonText}
+									onPress={() => setHidePassword(!hidePassword)}
+								>
+									{hidePassword ? "Показати" : "Приховати"}
+								</Text>
 							</View>
 							<TouchableOpacity style={styles.primaryBtn}>
-								<Text style={styles.textBtn}>Увійти</Text>
+								<Text style={styles.textBtn} onPress={onLogin}>
+									Увійти
+								</Text>
 							</TouchableOpacity>
 
 							<Text style={styles.registerLink}>
