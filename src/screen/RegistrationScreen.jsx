@@ -40,7 +40,7 @@ export const RegistrationScreen = () => {
 				<View style={styles.container}>
 					<KeyboardAvoidingView
 						behavior={Platform.OS == "ios" ? "padding" : "height"}
-						keyboardVerticalOffset={-250}
+						keyboardVerticalOffset={-500}
 					>
 						<View style={styles.form}>
 							<View style={styles.imageWrapper}>
