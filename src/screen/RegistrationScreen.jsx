@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
 
 	showPasswordButtonText: {
 		position: "absolute",
-		top: 16,
+		top: 10,
 		right: 16,
 
 		fontSize: 16,

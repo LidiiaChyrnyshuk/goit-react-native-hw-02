@@ -20,8 +20,8 @@ export default function App() {
 		return null;
 	} else {
 		return (
-			// <RegistrationScreen />
-			<LoginScreen />
+			<RegistrationScreen />
+			// <LoginScreen />
 			// <NavigationContainer>
 			// 	<Stack.Navigator>
 			// 		<Stack.Screen name="Registration" component={RegistrationScreen} />
