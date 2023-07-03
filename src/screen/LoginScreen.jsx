@@ -36,7 +36,7 @@ export const LoginScreen = () => {
 				<View style={styles.container}>
 					<KeyboardAvoidingView
 						behavior={Platform.OS == "ios" ? "padding" : "height"}
-						keyboardVerticalOffset={-500}
+						keyboardVerticalOffset={-100}
 					>
 						<View style={styles.form}>
 							<Text style={styles.screenTitle}>Увійти</Text>
